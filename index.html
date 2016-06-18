@@ -53,7 +53,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -95,8 +95,8 @@ opcache.revalidate_freq=60
 opcache.fast_shutdown=1
 opcache.enable_cli=1
 </code></pre><p>这是php文档推荐的配置，但是实际过程中，我们比较关注的是validate_timestamps,revalidate_freq.</p>
-<h4 id="revalidate-freq"><a href="#revalidate-freq" class="headerlink" title="revalidate_freq"></a>revalidate_freq</h4><p>How often (in seconds) to check file timestamps for changes to the shared<br>memory storage allocation. (“1” means validate once per second, but only<br>once per request. “0” means always validate)</p>
-<h4 id="validate-timestamps"><a href="#validate-timestamps" class="headerlink" title="validate_timestamps"></a>validate_timestamps</h4><p>When disabled, you must reset the OPcache manually or restart the<br>webserver for changes to the filesystem to take effect.<br>官方的解释如上，revalidate_freq 控制检查opcode的频率，默认为2s,validate_timestamps 决定你是否需要手动去重启webserver使其生效，一般设置为1.</p>
+<h4 id="revalidate-freq"><a href="#revalidate-freq" class="headerlink" title="revalidate_freq"></a>revalidate_freq</h4><p>How often (in seconds) to check file timestamps for changes to the shared memory storage allocation. (“1” means validate once per second, but only once per request. “0” means always validate)</p>
+<h4 id="validate-timestamps"><a href="#validate-timestamps" class="headerlink" title="validate_timestamps"></a>validate_timestamps</h4><p>When disabled, you must reset the OPcache manually or restart the webserver for changes to the filesystem to take effect.<br>官方的解释如上，revalidate_freq 控制检查opcode的频率，默认为2s,validate_timestamps 决定你是否需要手动去重启webserver使其生效，一般设置为1.</p>
 <p>在实际生产环境中，打开opcache能提升3～5倍的性能,这个几乎无任何成本，只需开启就行。那么问题来了，我们在实际上线的时候，经常会遇到代码更新后，还是会走原先的代码逻辑，检查配置以及线上代码，都没有发现问题.按照配置的说明，revalidate_freq 为2 的话，每2秒就会更新编译的opcode,但实际情况并非如此，我们尝试把某些变量通过网页开放出来，不断的刷新，看到的还是原来的值。后来我们在构建线上环境的实际，同时执行opcache_reset，却发现还是没有得到解决。<br>一次偶然，连续几次刷新了opcache_reset脚本的页面，神奇的事情发生了，页面看到的是最新的代码。于是猜想opcache_reset执行会失败，google了下，还真有这情况，<a href="https://bugs.php.net/bug.php?id=71621。于是乎，改了下脚本" target="_blank" rel="external">https://bugs.php.net/bug.php?id=71621。于是乎，改了下脚本</a>:</p>
 <pre><code>$opcache_status = opcache_get_status();
 echo &apos;before opcache_reset:&apos;, PHP_EOL;
@@ -130,7 +130,7 @@ print_r($opcache_status[&apos;opcache_statistics&apos;]);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/18/opcache-reset-failed-occasionally/" data-id="cipkp8l1e0000ecwo5ray3cac" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/18/opcache-reset-failed-occasionally/" data-id="cipkpakr60000erwo4xh07r83" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -155,7 +155,7 @@ print_r($opcache_status[&apos;opcache_statistics&apos;]);
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
     </div>
@@ -165,7 +165,7 @@ print_r($opcache_status[&apos;opcache_statistics&apos;]);
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
         
