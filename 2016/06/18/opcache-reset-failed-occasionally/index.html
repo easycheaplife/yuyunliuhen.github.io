@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/06/18/opcache-reset-failed-occasionally/index.html">
 <meta property="og:site_name" content="迟到的互联网从业者">
 <meta property="og:description" content="关于opcacheopcache 是在php 5.5以上版本以共享扩展的形式存在，编译时通过 –enable-opcache 选项使其可用;开启此选项后，可使用zend_extension 配置项开启。比如mac,/etc/php.ini 末尾加上zend_extension=opcache.so即可。    opcache.enable=1开启opcache,只有在设置了这个值之后，opcach">
-<meta property="og:updated_time" content="2016-06-18T05:05:09.000Z">
+<meta property="og:updated_time" content="2016-06-18T05:16:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="opcache_reset failed occasionally">
 <meta name="twitter:description" content="关于opcacheopcache 是在php 5.5以上版本以共享扩展的形式存在，编译时通过 –enable-opcache 选项使其可用;开启此选项后，可使用zend_extension 配置项开启。比如mac,/etc/php.ini 末尾加上zend_extension=opcache.so即可。    opcache.enable=1开启opcache,只有在设置了这个值之后，opcach">
@@ -52,9 +52,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -98,15 +98,12 @@ opcache.enable_cli=1
 <h4 id="validate-timestamps"><a href="#validate-timestamps" class="headerlink" title="validate_timestamps"></a>validate_timestamps</h4><p>When disabled, you must reset the OPcache manually or restart the webserver for changes to the filesystem to take effect.<br>官方的解释如上，revalidate_freq 控制检查opcode的频率，默认为2s,validate_timestamps 决定你是否需要手动去重启webserver使其生效，一般设置为1.</p>
 <p>在实际生产环境中，打开opcache能提升3～5倍的性能,这个几乎无任何成本，只需开启就行。那么问题来了，我们在实际上线的时候，经常会遇到代码更新后，还是会走原先的代码逻辑，检查配置以及线上代码，都没有发现问题.按照配置的说明，revalidate_freq 为2 的话，每2秒就会更新编译的opcode,但实际情况并非如此，我们尝试把某些变量通过网页开放出来，不断的刷新，看到的还是原来的值。后来我们在构建线上环境的实际，同时执行opcache_reset，却发现还是没有得到解决。<br>一次偶然，连续几次刷新了opcache_reset脚本的页面，神奇的事情发生了，页面看到的是最新的代码。于是猜想opcache_reset执行会失败，google了下，还真有这情况，<a href="https://bugs.php.net/bug.php?id=71621。于是乎，改了下脚本" target="_blank" rel="external">https://bugs.php.net/bug.php?id=71621。于是乎，改了下脚本</a>:</p>
 <pre><code>$opcache_status = opcache_get_status();
-echo &apos;before opcache_reset:&apos;, PHP_EOL;
-print_r($opcache_status[&apos;opcache_statistics&apos;]);
 if (isset($opcache_status[&quot;opcache_enabled&quot;]) &amp;&amp; !$opcache_status[&quot;opcache_enabled&quot;]) 
 {
     echo &quot;opcache empty, so skip it&quot;,PHP_EOL;
     exit(0);
 }
 $res = opcache_reset();
-
 $max_loop = 10; 
 $loop = 0;
 while(!$res){
@@ -115,21 +112,18 @@ while(!$res){
     }   
     $res = opcache_reset(); 
 }
-
 if(!$res){
     echo &quot;something terrible happened &quot;,PHP_EOL;
 }else{
     echo &quot;opcache_reset ok&quot;,PHP_EOL;
 }
-echo &apos;after opcache_reset:&apos;,PHP_EOL;
-print_r($opcache_status[&apos;opcache_statistics&apos;]);
 </code></pre><p>这本是一个比较初级的问题，也么有过多去考虑失败的情况，奇葩的是失败率竟然这么高，或许跟实际生产环境有关吧，在qps比较高的情况下失败几率比较大？或许吧！</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h2><p><a href="http://php.net/manual/en/book.opcache.php" target="_blank" rel="external">Opcache</a><br><a href="https://bugs.php.net/bug.php?id=71621" target="_blank" rel="external">opcache_reset sometimes returns false</a><br><a href="https://blog.linuxeye.com/361.html" target="_blank" rel="external">深入理解PHP Opcode缓存原理</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/18/opcache-reset-failed-occasionally/" data-id="cipkpgb0e0000f9wojcmtjoyz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/18/opcache-reset-failed-occasionally/" data-id="cipkpozjk0000fwwouagehxio" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -163,7 +157,7 @@ print_r($opcache_status[&apos;opcache_statistics&apos;]);
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -184,7 +178,7 @@ print_r($opcache_status[&apos;opcache_statistics&apos;]);
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 King Lee<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
