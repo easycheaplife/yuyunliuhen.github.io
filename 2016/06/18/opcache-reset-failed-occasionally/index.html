@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/06/18/opcache-reset-failed-occasionally/index.html">
 <meta property="og:site_name" content="迟来的互联网从业者">
 <meta property="og:description" content="关于opcacheopcache 是在php 5.5以上版本以共享扩展的形式存在，编译时通过 –enable-opcache 选项使其可用;开启此选项后，可使用zend_extension 配置项开启。比如mac,/etc/php.ini 末尾加上zend_extension=opcache.so即可。    opcache.enable=1开启opcache,只有在设置了这个值之后，opcach">
-<meta property="og:updated_time" content="2016-06-20T07:05:02.000Z">
+<meta property="og:updated_time" content="2016-06-20T07:07:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="opcache_reset failed occasionally">
 <meta name="twitter:description" content="关于opcacheopcache 是在php 5.5以上版本以共享扩展的形式存在，编译时通过 –enable-opcache 选项使其可用;开启此选项后，可使用zend_extension 配置项开启。比如mac,/etc/php.ini 末尾加上zend_extension=opcache.so即可。    opcache.enable=1开启opcache,只有在设置了这个值之后，opcach">
@@ -110,7 +110,8 @@ while(!$res){
     if($max_loop &lt;= $loop){
         break;
     }   
-    $res = opcache_reset(); 
+    $res = opcache_reset();
+    ++$loop;
 }
 if(!$res){
     echo &quot;something terrible happened &quot;,PHP_EOL;
@@ -124,7 +125,7 @@ if(!$res){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/18/opcache-reset-failed-occasionally/" data-id="cipnohtjd0000zgwofmkcf5wp" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/06/18/opcache-reset-failed-occasionally/" data-id="cipnok2ee000008woz9a5687x" class="article-share-link">Partager</a>
       
       
     </footer>
