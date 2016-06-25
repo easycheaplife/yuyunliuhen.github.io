@@ -5,19 +5,16 @@
   
   <title>my nginx config | 迟来的互联网从业者</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="目前只是尝试了虚拟主机的配置，对目前来说已经足够，更强大的功能还需后续探索！通过以下配置，你可以:1 通过nginx访问指定主机端口地址；2 可以直接访问根目录的文件；    server {        listen       7777;        server_name  localhost;
-    # disable index config, you can access dir">
+  <meta name="description" content="目前只是尝试了虚拟主机的配置，对目前来说已经足够，更强大的功能还需后续探索！通过以下配置，你可以:1 通过nginx访问指定主机端口地址；2 可以直接访问根目录的文件；    server {        listen       7777;        server_name  localhost;        disable index config, you can access di">
 <meta property="og:type" content="article">
 <meta property="og:title" content="my nginx config">
 <meta property="og:url" content="http://yoursite.com/2016/06/26/my-nginx-config/index.html">
 <meta property="og:site_name" content="迟来的互联网从业者">
-<meta property="og:description" content="目前只是尝试了虚拟主机的配置，对目前来说已经足够，更强大的功能还需后续探索！通过以下配置，你可以:1 通过nginx访问指定主机端口地址；2 可以直接访问根目录的文件；    server {        listen       7777;        server_name  localhost;
-    # disable index config, you can access dir">
-<meta property="og:updated_time" content="2016-06-25T16:29:25.000Z">
+<meta property="og:description" content="目前只是尝试了虚拟主机的配置，对目前来说已经足够，更强大的功能还需后续探索！通过以下配置，你可以:1 通过nginx访问指定主机端口地址；2 可以直接访问根目录的文件；    server {        listen       7777;        server_name  localhost;        disable index config, you can access di">
+<meta property="og:updated_time" content="2016-06-25T16:30:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="my nginx config">
-<meta name="twitter:description" content="目前只是尝试了虚拟主机的配置，对目前来说已经足够，更强大的功能还需后续探索！通过以下配置，你可以:1 通过nginx访问指定主机端口地址；2 可以直接访问根目录的文件；    server {        listen       7777;        server_name  localhost;
-    # disable index config, you can access dir">
+<meta name="twitter:description" content="目前只是尝试了虚拟主机的配置，对目前来说已经足够，更强大的功能还需后续探索！通过以下配置，你可以:1 通过nginx访问指定主机端口地址；2 可以直接访问根目录的文件；    server {        listen       7777;        server_name  localhost;        disable index config, you can access di">
   
     <link rel="alternate" href="/atom.xml" title="迟来的互联网从业者" type="application/atom+xml">
   
@@ -88,18 +85,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>目前只是尝试了虚拟主机的配置，对目前来说已经足够，更强大的功能还需后续探索！<br>通过以下配置，你可以:<br>1 通过nginx访问指定主机端口地址；<br>2 可以直接访问根目录的文件；<br>    server {<br>        listen       7777;<br>        server_name  localhost;</p>
-<pre><code>    # disable index config, you can access directory directory.
-    #index    info.php;
-    client_max_body_size    50M;
-    error_log /var/log/nginx/local.error.log;
-    access_log /var/log/nginx/local.access.log;
-    root    /Users/sophia/www;    
-    autoindex on;
-    autoindex_exact_size off;
-    autoindex_localtime on;
-
-    location / {
+        <p>目前只是尝试了虚拟主机的配置，对目前来说已经足够，更强大的功能还需后续探索！<br>通过以下配置，你可以:<br>1 通过nginx访问指定主机端口地址；<br>2 可以直接访问根目录的文件；<br>    server {<br>        listen       7777;<br>        server_name  localhost;<br>        disable index config, you can access directory directory.<br>        index    info.php;<br>        client_max_body_size    50M;<br>        error_log /var/log/nginx/local.error.log;<br>        access_log /var/log/nginx/local.access.log;<br>        root    /Users/sophia/www;<br>        autoindex on;<br>        autoindex_exact_size off;<br>        autoindex_localtime on;</p>
+<pre><code>    location / {
         try_files   $uri $uri/ index.php$is_args$args;
     }
 
@@ -118,7 +105,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/26/my-nginx-config/" data-id="cipvdteua00005bwowgbyxc47" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/26/my-nginx-config/" data-id="cipvdv3v700005twozfsyibsf" class="article-share-link">Share</a>
       
       
     </footer>
