@@ -51,9 +51,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -63,6 +63,67 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-my-nginx-config" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/26/my-nginx-config/" class="article-date">
+  <time datetime="2016-06-25T16:18:24.000Z" itemprop="datePublished">2016-06-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/26/my-nginx-config/">my nginx config</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>目前只是尝试了虚拟主机的配置，对目前来说已经足够，更强大的功能还需后续探索！<br>通过以下配置，你可以:<br>1 通过nginx访问指定主机端口地址；<br>2 可以直接访问根目录的文件；<br>    server {<br>        listen       7777;<br>        server_name  localhost;</p>
+<pre><code>    # disable index config, you can access directory directory.
+    #index    info.php;
+    client_max_body_size    50M;
+    error_log /var/log/nginx/local.error.log;
+    access_log /var/log/nginx/local.access.log;
+    root    /Users/sophia/www;    
+    autoindex on;
+    autoindex_exact_size off;
+    autoindex_localtime on;
+
+    location / {
+        try_files   $uri $uri/ index.php$is_args$args;
+    }
+
+    location ~ \.php$ {
+        try_files    $uri =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass   127.0.0.1:9000;
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        fastcgi_param  SCRIPT_NAME  $fastcgi_script_name;
+        include        fastcgi_params;
+    }
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/06/26/my-nginx-config/" data-id="cipvds2ce00004owoz68z5gzj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-opcache-reset-failed-occasionally" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -126,7 +187,7 @@ if(!$res){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/18/opcache-reset-failed-occasionally/" data-id="cipnok2ee000008woz9a5687x" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/06/18/opcache-reset-failed-occasionally/" data-id="cipvds2cj00014owola7zunfb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -161,9 +222,13 @@ if(!$res){
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/06/26/my-nginx-config/">my nginx config</a>
+          </li>
         
           <li>
             <a href="/2016/06/18/opcache-reset-failed-occasionally/">opcache_reset failed occasionally</a>
@@ -182,7 +247,7 @@ if(!$res){
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 King Lee<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
