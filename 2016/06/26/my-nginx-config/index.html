@@ -5,16 +5,16 @@
   
   <title>my nginx config | 迟来的互联网从业者</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="就php 初学者来说，比如我，最开始都是从apache环境开始，一般的linux/unix都默认带有php 开发环境；而生产环境，nginx+php-fpm已成为标配。apache 以线程或者流程为导向的方式来处理请求，而nginx是异步事件驱动处理请求，后者在高负载下具有更高的处理请求能力。目前只是尝试了虚拟主机的配置，对目前来说已经足够，更强大的功能还需后续探索！通过以下配置，你可以:1 通过">
+  <meta name="description" content="就php 初学者来说，比如我，最开始都是从apache环境开始，一般的linux/unix都默认带有php 开发环境；而生产环境，nginx+php-fpm已成为标配。apache 以线程或者流程为导向的方式来处理请求，而nginx是异步事件驱动处理请求，后者在高负载下具有更高的处理请求能力。nginx一般有一个master进程以及n个worker进程，master读取配置并管理worker进程，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="my nginx config">
 <meta property="og:url" content="http://yoursite.com/2016/06/26/my-nginx-config/index.html">
 <meta property="og:site_name" content="迟来的互联网从业者">
-<meta property="og:description" content="就php 初学者来说，比如我，最开始都是从apache环境开始，一般的linux/unix都默认带有php 开发环境；而生产环境，nginx+php-fpm已成为标配。apache 以线程或者流程为导向的方式来处理请求，而nginx是异步事件驱动处理请求，后者在高负载下具有更高的处理请求能力。目前只是尝试了虚拟主机的配置，对目前来说已经足够，更强大的功能还需后续探索！通过以下配置，你可以:1 通过">
-<meta property="og:updated_time" content="2016-06-26T03:45:14.000Z">
+<meta property="og:description" content="就php 初学者来说，比如我，最开始都是从apache环境开始，一般的linux/unix都默认带有php 开发环境；而生产环境，nginx+php-fpm已成为标配。apache 以线程或者流程为导向的方式来处理请求，而nginx是异步事件驱动处理请求，后者在高负载下具有更高的处理请求能力。nginx一般有一个master进程以及n个worker进程，master读取配置并管理worker进程，">
+<meta property="og:updated_time" content="2016-06-26T04:12:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="my nginx config">
-<meta name="twitter:description" content="就php 初学者来说，比如我，最开始都是从apache环境开始，一般的linux/unix都默认带有php 开发环境；而生产环境，nginx+php-fpm已成为标配。apache 以线程或者流程为导向的方式来处理请求，而nginx是异步事件驱动处理请求，后者在高负载下具有更高的处理请求能力。目前只是尝试了虚拟主机的配置，对目前来说已经足够，更强大的功能还需后续探索！通过以下配置，你可以:1 通过">
+<meta name="twitter:description" content="就php 初学者来说，比如我，最开始都是从apache环境开始，一般的linux/unix都默认带有php 开发环境；而生产环境，nginx+php-fpm已成为标配。apache 以线程或者流程为导向的方式来处理请求，而nginx是异步事件驱动处理请求，后者在高负载下具有更高的处理请求能力。nginx一般有一个master进程以及n个worker进程，master读取配置并管理worker进程，">
   
     <link rel="alternate" href="/atom.xml" title="迟来的互联网从业者" type="application/atom+xml">
   
@@ -85,7 +85,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>就php 初学者来说，比如我，最开始都是从apache环境开始，一般的linux/unix都默认带有php 开发环境；而生产环境，nginx+php-fpm已成为标配。apache 以线程或者流程为导向的方式来处理请求，而nginx是异步事件驱动处理请求，后者在高负载下具有更高的处理请求能力。<br>目前只是尝试了虚拟主机的配置，对目前来说已经足够，更强大的功能还需后续探索！<br>通过以下配置，你可以:<br>1 通过nginx访问指定主机端口地址；<br>2 可以直接访问根目录的文件；</p>
+        <p>就php 初学者来说，比如我，最开始都是从apache环境开始，一般的linux/unix都默认带有php 开发环境；而生产环境，nginx+php-fpm已成为标配。apache 以线程或者流程为导向的方式来处理请求，而nginx是异步事件驱动处理请求，后者在高负载下具有更高的处理请求能力。<br>nginx一般有一个master进程以及n个worker进程，master读取配置并管理worker进程，实际处理请求的是worker进程，worker进程的个数可在配置文件中指定或者根据可用的cpu个数自动调节(worker_processes number | auto;).<br>nginx 的配置文件为nginx.conf,位置/usr/local/nginx/conf,/etc/nginx,/usr/local/etc/nginx目录下。<br>nginx的启动方式很简单，类似linux的信号，nginx -s signal，signal包括stop,quit,reload,reopen.需要注意的是，quit关闭是会处理完当前的请求，比较推荐这种关闭方式。<br>目前只是尝试了虚拟主机的配置，对目前来说已经足够，更强大的功能还需后续探索！<br>通过以下配置，你可以:<br>1 通过nginx访问指定主机端口地址；<br>2 可以直接访问根目录的文件；</p>
 <pre><code>server{
     listen       7777;
     server_name  localhost;
@@ -117,7 +117,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/26/my-nginx-config/" data-id="cipw1ypn80000bqwopnw0baja" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/26/my-nginx-config/" data-id="cipw2x4l00000ckwo71u7sbzi" class="article-share-link">Share</a>
       
       
     </footer>
