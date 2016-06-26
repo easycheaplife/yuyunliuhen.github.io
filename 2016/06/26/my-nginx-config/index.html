@@ -21,7 +21,7 @@ server{
     server_name  localhost;
     client_max_body_size    50M;
     error_log /var/log/">
-<meta property="og:updated_time" content="2016-06-25T16:34:48.000Z">
+<meta property="og:updated_time" content="2016-06-26T03:26:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="my nginx config">
 <meta name="twitter:description" content="目前只是尝试了虚拟主机的配置，对目前来说已经足够，更强大的功能还需后续探索！通过以下配置，你可以:1 通过nginx访问指定主机端口地址；2 可以直接访问根目录的文件；
@@ -67,9 +67,9 @@ server{
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -126,11 +126,12 @@ server{
         include        fastcgi_params;
     }
 }
-</code></pre>
+</code></pre><p>listen: 设置nginx监听哪个端口进入的http请求，大多数情况下，http流量从80端口进入；<br>server_name: 用于识别虚拟主机的域名，这个设置要设为你的应用使用的域名，而且域名指向服务器的ip地址。如果http请求的host首部的值和虚拟主机中server_name的值匹配，nginx就会把这个http请求发送给这个虚拟主机.示例中使用的本地localhost;<br>index: http请求URL指定的入口文件，示例中没有使用，使用后无法以目录形式访问了；<br>client_max_body_size: nginx 接受http请求主体长度的最大值；如果请求主体长度超过这个最大值，nginx会返回http 4xx响应；<br>error_log: 访问错误日志目录路径；<br>access_log: 访问日志目录路径；<br>root：根目录路径；<br>location: 告诉nginx如果处理匹配指定url模式的http请求；<br>location /｛｝使用try_files指令查找匹配所有请求的url文件，如果未找到相应的文件，再查找匹配所请求的url目录，如果目录也没找到，则把http请求的url重写未/index.php,如果有查询字符串的话，还会把查询字符串附加到url末尾。这个重写的url,以及所有以.php结尾的url,都有location ~.php处理。<br>location ~/.php 把http请求转发给php-fpm进程池处理，也就是启动的127.0.0.1:9000。<br>autoindex: nginx默认是不开启目录列表的，需要开启这个选项；<br>autoindex_exact_size: 配合autoindex使用，默认on,显示文件的确切大小，单位bytes;改为off之后，显示文件的大概大小，单位kb,mb或者gb;<br>autoindex_localtime: 配合autoindex使用，默认on,显示GMT时间，改为off之后，显示文件服务器时间。</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/26/my-nginx-config/" data-id="cipve0csd00006owoesxkve9l" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/06/26/my-nginx-config/" data-id="cipw1a5u60000a7wosiw0cdhs" class="article-share-link">Share</a>
       
       
     </footer>
@@ -141,7 +142,7 @@ server{
   
   
     <a href="/2016/06/18/opcache-reset-failed-occasionally/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">opcache_reset failed occasionally</div>
     </a>
   
@@ -174,7 +175,7 @@ server{
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -199,7 +200,7 @@ server{
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 King Lee<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
