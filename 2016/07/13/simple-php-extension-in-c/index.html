@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>simple php extension in c | 迟来的互联网从业者</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近打算深入了解php内部的原理以及如何扩展，介绍php源码的书籍也比较少,目前发现网络上有一本电子版的《深入理解PHP内核》，先从这个入手吧！上面是废话，还是切入正题吧。php扩展比想象的要简单，按照网上的教程一步一步操作，无奈很久没有使用c/c++了，出现了一些比较常见的错误，却还需要去查资料，真是汗。
+本机系统mac，系统默认php版本是5.5.34,源码编译版本7.0.8,源码目录~/so">
+<meta property="og:type" content="article">
+<meta property="og:title" content="simple php extension in c">
+<meta property="og:url" content="http://yoursite.com/2016/07/13/simple-php-extension-in-c/index.html">
+<meta property="og:site_name" content="迟来的互联网从业者">
+<meta property="og:description" content="最近打算深入了解php内部的原理以及如何扩展，介绍php源码的书籍也比较少,目前发现网络上有一本电子版的《深入理解PHP内核》，先从这个入手吧！上面是废话，还是切入正题吧。php扩展比想象的要简单，按照网上的教程一步一步操作，无奈很久没有使用c/c++了，出现了一些比较常见的错误，却还需要去查资料，真是汗。
+本机系统mac，系统默认php版本是5.5.34,源码编译版本7.0.8,源码目录~/so">
+<meta property="og:updated_time" content="2016-07-13T04:22:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="simple php extension in c">
+<meta name="twitter:description" content="最近打算深入了解php内部的原理以及如何扩展，介绍php源码的书籍也比较少,目前发现网络上有一本电子版的《深入理解PHP内核》，先从这个入手吧！上面是废话，还是切入正题吧。php扩展比想象的要简单，按照网上的教程一步一步操作，无奈很久没有使用c/c++了，出现了一些比较常见的错误，却还需要去查资料，真是汗。
+本机系统mac，系统默认php版本是5.5.34,源码编译版本7.0.8,源码目录~/so">
+  
+    <link rel="alternate" href="/atom.xml" title="迟来的互联网从业者" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">迟来的互联网从业者</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-simple-php-extension-in-c" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/13/simple-php-extension-in-c/" class="article-date">
+  <time datetime="2016-07-13T03:11:21.000Z" itemprop="datePublished">2016-07-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      simple php extension in c
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近打算深入了解php内部的原理以及如何扩展，介绍php源码的书籍也比较少,目前发现网络上有一本电子版的《深入理解PHP内核》，先从这个入手吧！<br>上面是废话，还是切入正题吧。php扩展比想象的要简单，按照网上的教程一步一步操作，无奈很久没有使用c/c++了，出现了一些比较常见的错误，却还需要去查资料，真是汗。</p>
+<p>本机系统mac，系统默认php版本是5.5.34,源码编译版本7.0.8,源码目录~/source/php-7.0.8,步骤如下:<br>$cd ext &amp; ./ext_skel –extname=ext_test<br>$vi ext_test/config.m4</p>
+<pre><code>dnl PHP_ARG_WITH(ext_test, for ext_test support,
+dnl Make sure that the comment is aligned:
+dnl [  --with-ext_test             Include ext_test support])
+</code></pre><p>修改为:</p>
+<pre><code>PHP_ARG_WITH(ext_test, for ext_test support,
+[  --with-ext_test             Include ext_test support])
+</code></pre><p>$vi ext_test/ext_test.c</p>
+<pre><code>const zend_function_entry ext_test_functions[] = {
+    PHP_FE(confirm_ext_test_compiled,   NULL)       /* For testing, remove later. */
+    PHP_FE_END  /* Must be the last line in ext_test_functions[] */
+};
+</code></pre><p>更改为:</p>
+<pre><code>const zend_function_entry ext_test_functions[] = {
+    PHP_FE(confirm_ext_test_compiled,   NULL)       /* For testing, remove later. */
+    PHP_FE(ext_test_helloworld,  NULL)
+    PHP_FE_END  /* Must be the last line in ext_test_functions[] */
+};
+</code></pre><p>在PHP_FUNCTION(confirm_ext_test_compiled)添加:</p>
+<pre><code>PHP_FUNCTION(ext_test_helloworld)
+{
+    char *arg = NULL;
+    int arg_len, len;
+    char *strg;
+    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, &quot;s&quot;, &amp;arg, &amp;arg_len) == FAILURE) {
+        return;
+    }
+    php_printf(&quot;Hello World!\n&quot;);
+    RETURN_TRUE;
+}
+</code></pre><p>$cd ext_test &amp; /usr/local/webserver/php/bin/phpize &amp; ./configure &amp; make  </p>
+<p>编译完后，在php.ini 末尾加上:</p>
+<pre><code>extension=/Users/sophia/source/php-7.0.8/ext/ext_test/modules/ext_test.so
+</code></pre><p>$php -r ‘ext_test_helloworld(“test”);’<br>执行后出现 Hello World! 就说明成功了！</p>
+<p>备注：<br>1    进行make 编译的时候，如果出现 error: use of undeclared identifier ‘zend_string’;将zend_string 替换为char 即可;<br>2   本机上有两个版本,默认编译的是系统版本的php,启动编译安装版本的php-fpm(php7),会出现以下错误:</p>
+<pre><code>$ /usr/local/webserver/php/sbin/php-fpm -c /usr/local/webserver/php/etc/php.ini
+[13-Jul-2016 12:13:52] NOTICE: PHP message: PHP Warning:  PHP Startup: ext_test: Unable to initialize module
+Module compiled with module API=20121212
+PHP    compiled with module API=20151012
+These options need to match
+ in Unknown on line 0
+ &lt;br /&gt;
+ &lt;b&gt;Warning&lt;/b&gt;:  PHP Startup: ext_test: Unable to initialize module
+ Module compiled with module API=20121212
+ PHP    compiled with module API=20151012
+ These options need to match
+  in &lt;b&gt;Unknown&lt;/b&gt; on line &lt;b&gt;0&lt;/b&gt;&lt;br /&gt;
+</code></pre><p>解决办法:<br>在执行./configure 后，<br>$vi MakeFile</p>
+<pre><code>INCLUDES = -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib
+</code></pre><p>替换为</p>
+<pre><code>INCLUDES = -I/Users/sophia/source/php-7.0.8/ -I/Users/sophia/source/php-7.0.8/main -I/Users/sophia/source/php-7.0.8/TSRM -I/Users/sophia/source/php-7.0.8/Zend -I/Users/sophia/source/php-7.0.8/ext -I/Users/sophia/source/php-7.0.8/ext/date/lib
+</code></pre><p>也就是包含的头文件使用编译版本的头文件就可以了.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/07/13/simple-php-extension-in-c/" data-id="ciqkdrtlo0000eswoxdo0z41s" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/26/my-nginx-config/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">my nginx config</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/07/13/simple-php-extension-in-c/">simple php extension in c</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/26/my-nginx-config/">my nginx config</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/18/opcache-reset-failed-occasionally/">opcache_reset failed occasionally</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 King Lee<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
