@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>the maximum number of concurrent stand-alone | 迟来的互联网从业者</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一直以来，存在一个误解：单ip最大并发数量上限是64k,之前的测试也一直限制在65536.直到最近阅读了一些相关单机百万并发连接的文章，才明白理论上是可行的，事实上已经有人做到了。
+以下文字引自单机最大tcp连接数local ip, local port,remote ip,remote port 四个元素标识一个tcp连接.
+client最大tcp连接数client 每次发起tcp请求时，除非绑">
+<meta property="og:type" content="article">
+<meta property="og:title" content="the maximum number of concurrent stand-alone">
+<meta property="og:url" content="http://yoursite.com/2016/07/23/the-maximum-number-of-concurrent-stand-alone/index.html">
+<meta property="og:site_name" content="迟来的互联网从业者">
+<meta property="og:description" content="一直以来，存在一个误解：单ip最大并发数量上限是64k,之前的测试也一直限制在65536.直到最近阅读了一些相关单机百万并发连接的文章，才明白理论上是可行的，事实上已经有人做到了。
+以下文字引自单机最大tcp连接数local ip, local port,remote ip,remote port 四个元素标识一个tcp连接.
+client最大tcp连接数client 每次发起tcp请求时，除非绑">
+<meta property="og:updated_time" content="2016-07-23T16:25:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="the maximum number of concurrent stand-alone">
+<meta name="twitter:description" content="一直以来，存在一个误解：单ip最大并发数量上限是64k,之前的测试也一直限制在65536.直到最近阅读了一些相关单机百万并发连接的文章，才明白理论上是可行的，事实上已经有人做到了。
+以下文字引自单机最大tcp连接数local ip, local port,remote ip,remote port 四个元素标识一个tcp连接.
+client最大tcp连接数client 每次发起tcp请求时，除非绑">
+  
+    <link rel="alternate" href="/atom.xml" title="迟来的互联网从业者" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">迟来的互联网从业者</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-the-maximum-number-of-concurrent-stand-alone" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/23/the-maximum-number-of-concurrent-stand-alone/" class="article-date">
+  <time datetime="2016-07-23T15:18:59.000Z" itemprop="datePublished">2016-07-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      the maximum number of concurrent stand-alone
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一直以来，存在一个误解：单ip最大并发数量上限是64k,之前的测试也一直限制在65536.直到最近阅读了一些相关单机百万并发连接的文章，才明白理论上是可行的，事实上已经有人做到了。</p>
+<p>以下文字引自<a href="http://www.cnblogs.com/mydomain/archive/2013/05/27/3100835.html" target="_blank" rel="external">单机最大tcp连接数</a><br>local ip, local port,remote ip,remote port 四个元素标识一个tcp连接.</p>
+<h3 id="client最大tcp连接数"><a href="#client最大tcp连接数" class="headerlink" title="client最大tcp连接数"></a>client最大tcp连接数</h3><p>client 每次发起tcp请求时，除非绑定端口，通常会让系统选取一个空闲的本地端口（local port），该端口是独占的，不能和其他tcp连接共享。tcp端口的数据类型是unsigned short，因此本地端口个数最大只有65536，端口0有特殊含义，不能使用，这样可用端口最多只有65535，所以在全部作为client端的情况下，最大tcp连接数为65535，这些连接可以连到不同的server ip。</p>
+<h3 id="server最大tcp连接数"><a href="#server最大tcp连接数" class="headerlink" title="server最大tcp连接数"></a>server最大tcp连接数</h3><p>server通常固定在某个本地端口上监听，等待client的连接请求。不考虑地址重用（unix的SO_REUSEADDR选项）的情况下，<br>即使server端有多个ip，本地监听端口也是独占的，因此server端tcp连接4元组中只有remote ip（也就是client ip）和remote port（客户端port）是可变的，因此最大tcp连接为客户端ip数×客户端port数，对IPV4，不考虑ip地址分类等因素，最大tcp连接数约为2的32次方（ip数）×2的16次方（port数），也就是server端单机最大tcp连接数约为2的48次方。</p>
+<h3 id="实际的tcp连接数"><a href="#实际的tcp连接数" class="headerlink" title="实际的tcp连接数"></a>实际的tcp连接数</h3><p>上面给出的是理论上的单机最大连接数，在实际环境中，受到机器资源、操作系统等的限制，特别是sever端，其最大并发tcp连接数远不能达到理论上限。在unix/linux下限制连接数的主要因素是内存和允许的文件描述符个数（每个tcp连接都要占用一定内存，每个socket就是一个文件描述符），另外1024以下的端口通常为保留端口。在默认2.6内核配置下，经过试验，每个socket占用内存在15~20k之间。</p>
+<hr>
+<p>每一个连接都会占有一个open file,之前的理解open file的最大值是65536,实际上它的最大值为1048576,也就是系统允许的最大文件描述符数,从中也可看出理论的最大连接数可达到百万。</p>
+<p><a href="http://www.cnblogs.com/dongfuye/p/4986301.html" target="_blank" rel="external">单机千万并发连接实战(修订版)</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/07/23/the-maximum-number-of-concurrent-stand-alone/" data-id="ciqzdzws10000srwona7ewz07" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/13/simple-php-extension-in-c/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">simple php extension in c</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/07/23/the-maximum-number-of-concurrent-stand-alone/">the maximum number of concurrent stand-alone</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/13/simple-php-extension-in-c/">simple php extension in c</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/26/my-nginx-config/">my nginx config</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/18/opcache-reset-failed-occasionally/">opcache_reset failed occasionally</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 King Lee<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
