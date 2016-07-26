@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/06/18/opcache-reset-failed-occasionally/index.html">
 <meta property="og:site_name" content="迟来的互联网从业者">
 <meta property="og:description" content="关于opcacheopcache 是在php 5.5以上版本以共享扩展的形式存在，编译时通过 –enable-opcache 选项使其可用;开启此选项后，可使用zend_extension 配置项开启。比如mac,/etc/php.ini 末尾加上zend_extension=opcache.so即可。    opcache.enable=1开启opcache,只有在设置了这个值之后，opcach">
-<meta property="og:updated_time" content="2016-06-20T07:07:55.000Z">
+<meta property="og:updated_time" content="2016-07-26T02:50:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="opcache_reset failed occasionally">
 <meta name="twitter:description" content="关于opcacheopcache 是在php 5.5以上版本以共享扩展的形式存在，编译时通过 –enable-opcache 选项使其可用;开启此选项后，可使用zend_extension 配置项开启。比如mac,/etc/php.ini 末尾加上zend_extension=opcache.so即可。    opcache.enable=1开启opcache,只有在设置了这个值之后，opcach">
@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -120,12 +120,12 @@ if(!$res){
 }
 </code></pre><p>这本是一个比较初级的问题，也么有过多去考虑失败的情况，奇葩的是失败率竟然这么高，或许跟实际生产环境有关吧，在qps比较高的情况下失败几率比较大？或许吧！</p>
 <p>补充:<br>1 opcache_reset 在高并发服务器会有问题；<br>2 opcache_get_status 在opcache_reset 执行后，数据有延迟，并不会立即刷新！</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h2><p><a href="http://php.net/manual/en/book.opcache.php" target="_blank" rel="external">Opcache</a><br><a href="https://bugs.php.net/bug.php?id=71621" target="_blank" rel="external">opcache_reset sometimes returns false</a><br><a href="https://blog.linuxeye.com/361.html" target="_blank" rel="external">深入理解PHP Opcode缓存原理</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h2><p><a href="http://php.net/manual/en/book.opcache.php" target="_blank" rel="external">Opcache</a><br><a href="https://bugs.php.net/bug.php?id=71621" target="_blank" rel="external">opcache_reset sometimes returns false</a><br><a href="https://blog.linuxeye.com/361.html" target="_blank" rel="external">深入理解PHP Opcode缓存原理</a><br><a href="http://huoding.com/2016/05/27/515" target="_blank" rel="external">如何正确发布PHP代码</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/18/opcache-reset-failed-occasionally/" data-id="ciqze2nht0002thwoqe4idiwk" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2016/06/18/opcache-reset-failed-occasionally/" data-id="cir2v7gi30000f7won26zx55d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -135,7 +135,7 @@ if(!$res){
 <nav id="article-nav">
   
     <a href="/2016/06/26/my-nginx-config/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Nieuwer</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           my nginx config
@@ -163,7 +163,7 @@ if(!$res){
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
     </div>
@@ -173,7 +173,7 @@ if(!$res){
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
