@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2016 | 迟来的互联网从业者</title>
+  <title>start php-fpm with params -c and -y | 迟来的互联网从业者</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="迟来的互联网从业者">
-<meta property="og:url" content="http://yoursite.com/archives/2016/index.html">
+  <meta name="description" content="今天在装protobufd的时候，发现php-cli可用扩展，但是php-fpm却不可用，其实之前也遇到类似的问题,一直也没在意，今日特意找了下原因，发现是个很弱的原因：一直以来，启动php-fpm 都是以(/usr/local/webserver/php/sbin/php-fpm -c /usr/local/webserver/php/etc/php-fpm.conf)这种形式启动的，-c本是p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="start php-fpm with params -c and -y">
+<meta property="og:url" content="http://yoursite.com/2016/08/25/start-php-fpm-with-params-c-and-y/index.html">
 <meta property="og:site_name" content="迟来的互联网从业者">
-<meta property="og:description">
+<meta property="og:description" content="今天在装protobufd的时候，发现php-cli可用扩展，但是php-fpm却不可用，其实之前也遇到类似的问题,一直也没在意，今日特意找了下原因，发现是个很弱的原因：一直以来，启动php-fpm 都是以(/usr/local/webserver/php/sbin/php-fpm -c /usr/local/webserver/php/etc/php-fpm.conf)这种形式启动的，-c本是p">
+<meta property="og:updated_time" content="2016-08-25T12:55:39.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="迟来的互联网从业者">
-<meta name="twitter:description">
+<meta name="twitter:title" content="start php-fpm with params -c and -y">
+<meta name="twitter:description" content="今天在装protobufd的时候，发现php-cli可用扩展，但是php-fpm却不可用，其实之前也遇到类似的问题,一直也没在意，今日特意找了下原因，发现是个很弱的原因：一直以来，启动php-fpm 都是以(/usr/local/webserver/php/sbin/php-fpm -c /usr/local/webserver/php/etc/php-fpm.conf)这种形式启动的，-c本是p">
   
     <link rel="alternate" href="/atom.xml" title="迟来的互联网从业者" type="application/atom+xml">
   
@@ -62,115 +63,54 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/08/25/start-php-fpm-with-params-c-and-y/" class="archive-article-date">
-  <time datetime="2016-08-25T12:42:24.000Z" itemprop="datePublished">Aug 25</time>
+        <section id="main"><article id="post-start-php-fpm-with-params-c-and-y" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/25/start-php-fpm-with-params-c-and-y/" class="article-date">
+  <time datetime="2016-08-25T12:42:24.000Z" itemprop="datePublished">2016-08-25</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/25/start-php-fpm-with-params-c-and-y/">start php-fpm with params -c and -y</a>
+    <h1 class="article-title" itemprop="name">
+      start php-fpm with params -c and -y
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/07/23/the-maximum-number-of-concurrent-stand-alone/" class="archive-article-date">
-  <time datetime="2016-07-23T15:18:59.000Z" itemprop="datePublished">Jul 23</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/07/23/the-maximum-number-of-concurrent-stand-alone/">the maximum number of concurrent stand-alone</a>
-    </h1>
-  
+        <p>今天在装protobufd的时候，发现php-cli可用扩展，但是php-fpm却不可用，其实之前也遇到类似的问题,一直也没在意，今日特意找了下原因，发现是个很弱的原因：一直以来，启动php-fpm 都是以(/usr/local/webserver/php/sbin/php-fpm -c /usr/local/webserver/php/etc/php-fpm.conf)这种形式启动的，-c本是php.ini的路径，却指定了php-fpm.con的路径，奇怪的是居然没有报错，php-fpm.ini的配置还正常加载了。</p>
+<p>正确的方式是：/usr/local/webserver/php/sbin/php-fpm -c /usr/local/webserver/php/etc/php.ini -y /usr/local/webserver/php/etc/php-fpm.conf  </p>
+<p>切记：要细心！！！</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/07/13/simple-php-extension-in-c/" class="archive-article-date">
-  <time datetime="2016-07-13T03:11:21.000Z" itemprop="datePublished">Jul 13</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/07/13/simple-php-extension-in-c/">simple php extension in c</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/06/26/my-nginx-config/" class="archive-article-date">
-  <time datetime="2016-06-25T16:18:24.000Z" itemprop="datePublished">Jun 26</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/08/25/start-php-fpm-with-params-c-and-y/" data-id="cisac3qkp0004sus65deu57nt" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/26/my-nginx-config/">my nginx config</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/06/18/opcache-reset-failed-occasionally/" class="archive-article-date">
-  <time datetime="2016-06-18T03:19:33.000Z" itemprop="datePublished">Jun 18</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/18/opcache-reset-failed-occasionally/">opcache_reset failed occasionally</a>
-    </h1>
-  
-
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/23/the-maximum-number-of-concurrent-stand-alone/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">the maximum number of concurrent stand-alone</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 </section>
         

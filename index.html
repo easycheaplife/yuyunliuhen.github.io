@@ -64,6 +64,45 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-start-php-fpm-with-params-c-and-y" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/25/start-php-fpm-with-params-c-and-y/" class="article-date">
+  <time datetime="2016-08-25T12:42:24.000Z" itemprop="datePublished">2016-08-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/25/start-php-fpm-with-params-c-and-y/">start php-fpm with params -c and -y</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天在装protobufd的时候，发现php-cli可用扩展，但是php-fpm却不可用，其实之前也遇到类似的问题,一直也没在意，今日特意找了下原因，发现是个很弱的原因：一直以来，启动php-fpm 都是以(/usr/local/webserver/php/sbin/php-fpm -c /usr/local/webserver/php/etc/php-fpm.conf)这种形式启动的，-c本是php.ini的路径，却指定了php-fpm.con的路径，奇怪的是居然没有报错，php-fpm.ini的配置还正常加载了。</p>
+<p>正确的方式是：/usr/local/webserver/php/sbin/php-fpm -c /usr/local/webserver/php/etc/php.ini -y /usr/local/webserver/php/etc/php-fpm.conf  </p>
+<p>切记：要细心！！！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/08/25/start-php-fpm-with-params-c-and-y/" data-id="cisac3qkp0004sus65deu57nt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-the-maximum-number-of-concurrent-stand-alone" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/07/23/the-maximum-number-of-concurrent-stand-alone/" class="article-date">
@@ -98,7 +137,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/23/the-maximum-number-of-concurrent-stand-alone/" data-id="cir4l69n10003u4woqom0eyi6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/07/23/the-maximum-number-of-concurrent-stand-alone/" data-id="cisac3qkm0003sus6wn4ijucu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -187,7 +226,7 @@ These options need to match
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/13/simple-php-extension-in-c/" data-id="cir4l69my0002u4wo13nef1xo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/07/13/simple-php-extension-in-c/" data-id="cisac3qk80000sus6nxabmklc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -251,7 +290,7 @@ These options need to match
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/26/my-nginx-config/" data-id="cir4l69mn0000u4wo2d42skfz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/26/my-nginx-config/" data-id="cisac3qki0002sus6x89xcwgc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -323,7 +362,7 @@ if(!$res){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/18/opcache-reset-failed-occasionally/" data-id="cir4l69ms0001u4woy0xc9gwe" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/18/opcache-reset-failed-occasionally/" data-id="cisac3qkh0001sus6k2eqowqy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -350,7 +389,7 @@ if(!$res){
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
     </div>
   </div>
 
@@ -361,6 +400,10 @@ if(!$res){
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/08/25/start-php-fpm-with-params-c-and-y/">start php-fpm with params -c and -y</a>
+          </li>
         
           <li>
             <a href="/2016/07/23/the-maximum-number-of-concurrent-stand-alone/">the maximum number of concurrent stand-alone</a>
